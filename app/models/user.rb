@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :reviews
-  has_many :reviewed_movies, through: :reviews
+  has_many :reviewed_movies, through: :reviews, source: :movie
 
-  validates :user_name, :email, presence: true
+  validates :username, :email, presence: true
 end
