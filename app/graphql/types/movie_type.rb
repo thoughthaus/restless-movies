@@ -6,7 +6,7 @@ class Types::MovieType < Types::BaseObject
   field :revenue, Float, null: true
   field :runtime, Float, null: true
   field :description, String, null: true
-  field :release_date, Date, null: true
+  field :release_date, String, null: true
   field :adult, Boolean, null: false
-  field :reviews, [ReviewType], null: true
+  field :reviews, [Types::ReviewType], null: true
 end
