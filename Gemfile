@@ -11,6 +11,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'graphql'
 gem 'devise'
+gem 'devise-jwt', '~>0.5.8'
+gem 'responders'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
