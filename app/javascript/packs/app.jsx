@@ -5,14 +5,16 @@ import { ApolloProvider } from "react-apollo";
 
 import ApolloClient from "apollo-boost";
 
-import MoviesList from '../components/movies'
+import MoviesList from "../components/movies";
 
-const csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+const csrfToken = document
+  .querySelector("meta[name=csrf-token]")
+  .getAttribute("content");
 
 const client = new ApolloClient({
   uri: "/graphql",
   headers: {
-    'X-CSRF-Token': csrfToken
+    "X-CSRF-Token": csrfToken
   }
 });
 
@@ -24,6 +26,4 @@ const App = () => (
   </ApolloProvider>
 );
 
-render(<App />, document.body.appendChild(document.createElement('div')));
-
-// render(<App />, document.getElementById("root"));
+render(<App />, document.body.appendChild(document.createElement("div")));
