@@ -20,7 +20,7 @@
 end
 
 10.times do
-  user = User.create(username: Faker::Name.name, email: Faker::Internet.email)
+  user = User.create(username: Faker::Internet.username, email: Faker::Internet.email)
 
   5.times do
     user.reviews.create(rating: rand(1..5), comment: Faker::Lorem.sentence(5, false, 10), movie_id: rand(1..10))
