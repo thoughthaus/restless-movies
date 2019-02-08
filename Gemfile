@@ -11,6 +11,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'graphql'
 gem 'bcrypt', '~> 3.1.7'
+gem 'pundit'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
