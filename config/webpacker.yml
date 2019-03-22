@@ -14,6 +14,8 @@ default: &default
   cache_manifest: false
 
   extensions:
+    - .ts
+    - .tsx
     - .jsx
     - .js
     - .sass
@@ -47,10 +49,9 @@ development:
     use_local_ip: false
     quiet: false
     headers:
-      'Access-Control-Allow-Origin': '*'
+      "Access-Control-Allow-Origin": "*"
     watch_options:
       ignored: /node_modules/
-
 
 test:
   <<: *default

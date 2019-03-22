@@ -1,15 +1,19 @@
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import React from "react";
+import * as React from "react";
+import { movies as MoviesType } from "./__generated__/Movies";
+
+class MoviesQuery extends Query<MoviesType> {}
 
 const Movies = () => (
-  <Query
+  <MoviesQuery
     query={gql`
-        {
+      query movies {
         movies {
           id
           title
           reviews {
+            id
             rating
             comment
           }
@@ -24,10 +28,13 @@ const Movies = () => (
       return data.movies.map(({ title, id, reviews }) => (
         <div key={id}>
           <h2>{title}</h2>
+          {reviews.map(({ rating, id: reviewId }) => (
+            <li key={reviewId}>Rating: {rating}</li>
+          ))}
         </div>
       ));
     }}
-  </Query>
+  </MoviesQuery>
 );
 
-export default Movies
+export default Movies;
