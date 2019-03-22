@@ -9,7 +9,7 @@ module Mutations
     argument :username, String, required: true
     argument :auth_provider, AuthProviderSignupData, required: true
 
-    type Types::UserType
+    field :username, String, null: true
 
     def resolve(username: nil, auth_provider: nil)
       User.create!(
