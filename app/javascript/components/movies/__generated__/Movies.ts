@@ -26,3 +26,7 @@ export interface movies {
    */
   movies: movies_movies[] | null;
 }
+
+export interface moviesVariables {
+  search?: string | null;
+}

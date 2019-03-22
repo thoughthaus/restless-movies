@@ -13,6 +13,8 @@ gem 'graphql'
 gem 'graphql-batch'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pundit'
+gem 'search_object', '1.2.0'
+gem 'search_object_graphql', '0.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
