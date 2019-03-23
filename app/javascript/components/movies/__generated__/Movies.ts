@@ -21,10 +21,7 @@ export interface movies_movies {
 }
 
 export interface movies {
-  /**
-   * Return all movies
-   */
-  movies: movies_movies[] | null;
+  movies: (movies_movies | null)[] | null;
 }
 
 export interface moviesVariables {

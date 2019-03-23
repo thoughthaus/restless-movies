@@ -15,7 +15,7 @@
         "fields": [
           {
             "name": "movies",
-            "description": "Return all movies",
+            "description": null,
             "args": [
               {
                 "name": "search",
@@ -32,13 +32,9 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Movie",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "Movie",
+                "ofType": null
               }
             },
             "isDeprecated": false,

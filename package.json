@@ -22,5 +22,9 @@
   "devDependencies": {
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "3.0.0"
+  },
+  "scripts": {
+    "apollo-codegen": "apollo client:codegen --target=typescript --localSchemaFile='./schema.json' --includes='./app/javascript/components/**/*.tsx'",
+    "apollo-schema": "apollo schema:download --endpoint http://localhost:3000/graphql schema.json"
   }
 }
