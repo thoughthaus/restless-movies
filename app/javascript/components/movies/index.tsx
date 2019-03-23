@@ -10,17 +10,21 @@ class Movies extends React.Component {
   state = {
     search: null,
     limit: 5,
-    offset: 0
+    offset: 0,
+    page: 0
   };
 
   handlePageClick = (data, fetchMore) => {
+    const { limit, search } = this.state;
     let selected = data.selected;
-    let offset = Math.ceil(selected * this.state.limit);
+    let offset = Math.ceil(selected * limit);
 
-    this.setState({ offset }, () => {
+    this.setState({ offset, page: selected }, () => {
       fetchMore({
         variables: {
-          offset
+          offset,
+          limit,
+          search
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
@@ -31,7 +35,7 @@ class Movies extends React.Component {
   };
 
   render() {
-    const { search, limit, offset } = this.state;
+    const { search, limit, offset, page } = this.state;
 
     return (
       <>
@@ -41,7 +45,7 @@ class Movies extends React.Component {
             query movies($search: String, $limit: Int!, $offset: Int!) {
               movies(search: $search) {
                 totalCount
-                collection(limit: $limit, offset: $offset) {
+                collection(search: $search, limit: $limit, offset: $offset) {
                   id
                   title
                   reviews {
@@ -74,15 +78,13 @@ class Movies extends React.Component {
                   </div>
                 ))}
                 <ReactPaginate
-                  previousLabel={"previous"}
-                  nextLabel={"next"}
-                  breakLabel={"..."}
-                  pageCount={data.movies.totalCount / limit}
-                  marginPagesDisplayed={2}
+                  pageCount={Math.ceil(data.movies.totalCount / limit)}
+                  marginPagesDisplayed={0}
                   pageRangeDisplayed={5}
                   onPageChange={pageData =>
                     this.handlePageClick(pageData, fetchMore)
                   }
+                  forcePage={page}
                 />
               </>
             );

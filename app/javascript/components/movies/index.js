@@ -33,15 +33,19 @@ var Movies = /** @class */ (function (_super) {
         _this.state = {
             search: null,
             limit: 5,
-            offset: 0
+            offset: 0,
+            page: 0
         };
         _this.handlePageClick = function (data, fetchMore) {
+            var _a = _this.state, limit = _a.limit, search = _a.search;
             var selected = data.selected;
-            var offset = Math.ceil(selected * _this.state.limit);
-            _this.setState({ offset: offset }, function () {
+            var offset = Math.ceil(selected * limit);
+            _this.setState({ offset: offset, page: selected }, function () {
                 fetchMore({
                     variables: {
-                        offset: offset
+                        offset: offset,
+                        limit: limit,
+                        search: search
                     },
                     updateQuery: function (prev, _a) {
                         var fetchMoreResult = _a.fetchMoreResult;
@@ -56,10 +60,10 @@ var Movies = /** @class */ (function (_super) {
     }
     Movies.prototype.render = function () {
         var _this = this;
-        var _a = this.state, search = _a.search, limit = _a.limit, offset = _a.offset;
+        var _a = this.state, search = _a.search, limit = _a.limit, offset = _a.offset, page = _a.page;
         return (React.createElement(React.Fragment, null,
             React.createElement("input", { onChange: function (e) { return _this.setState({ search: e.target.value }); } }),
-            React.createElement(MoviesQuery, { query: gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            query movies($search: String, $limit: Int!, $offset: Int!) {\n              movies(search: $search) {\n                totalCount\n                collection(limit: $limit, offset: $offset) {\n                  id\n                  title\n                  reviews {\n                    id\n                    rating\n                    comment\n                  }\n                }\n              }\n            }\n          "], ["\n            query movies($search: String, $limit: Int!, $offset: Int!) {\n              movies(search: $search) {\n                totalCount\n                collection(limit: $limit, offset: $offset) {\n                  id\n                  title\n                  reviews {\n                    id\n                    rating\n                    comment\n                  }\n                }\n              }\n            }\n          "]))), variables: {
+            React.createElement(MoviesQuery, { query: gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            query movies($search: String, $limit: Int!, $offset: Int!) {\n              movies(search: $search) {\n                totalCount\n                collection(search: $search, limit: $limit, offset: $offset) {\n                  id\n                  title\n                  reviews {\n                    id\n                    rating\n                    comment\n                  }\n                }\n              }\n            }\n          "], ["\n            query movies($search: String, $limit: Int!, $offset: Int!) {\n              movies(search: $search) {\n                totalCount\n                collection(search: $search, limit: $limit, offset: $offset) {\n                  id\n                  title\n                  reviews {\n                    id\n                    rating\n                    comment\n                  }\n                }\n              }\n            }\n          "]))), variables: {
                     search: search,
                     limit: limit,
                     offset: offset
@@ -81,9 +85,9 @@ var Movies = /** @class */ (function (_super) {
                                     rating));
                             })));
                     }),
-                    React.createElement(ReactPaginate, { previousLabel: "previous", nextLabel: "next", breakLabel: "...", pageCount: data.movies.totalCount / limit, marginPagesDisplayed: 2, pageRangeDisplayed: 5, onPageChange: function (pageData) {
+                    React.createElement(ReactPaginate, { pageCount: Math.ceil(data.movies.totalCount / limit), marginPagesDisplayed: 0, pageRangeDisplayed: 5, onPageChange: function (pageData) {
                             return _this.handlePageClick(pageData, fetchMore);
-                        } })));
+                        }, forcePage: page })));
             })));
     };
     return Movies;
