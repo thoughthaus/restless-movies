@@ -10,3 +10,12 @@ class Types::MovieType < Types::BaseObject
   field :adult, Boolean, null: false
   field :reviews, [Types::ReviewType], null: true
 end
+
+class Types::MovieResultsType < Types::BaseObject
+  field :total_count, Integer, null: false
+  field :collection, function: Resolvers::MovieResolver
+
+  def total_count
+    object.count
+  end
+end

@@ -2,7 +2,7 @@ module Types
   class QueryType < GraphQL::Schema::Object
     description "root query"
 
-    field :movies, function: Resolvers::MovieResolver
+    field :movies, MovieResultsType, function: Resolvers::MovieResultsResolver
 
     field :reviews, [ReviewType], null: true do
       description "Return reviews for a user"
